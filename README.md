@@ -1,1 +1,0 @@
-# Proyecto1-Teor-a-de-base-de-datos-II

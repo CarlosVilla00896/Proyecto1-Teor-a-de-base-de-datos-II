@@ -18,6 +18,7 @@ public class Constraints extends javax.swing.JInternalFrame {
     DropConstraint drop;
     ListarConstraints list;
     String flag = "";
+    String logMessage = "", sqlShow ="";
     
    public Constraints() {
         initComponents();
@@ -55,6 +56,7 @@ public class Constraints extends javax.swing.JInternalFrame {
         jButtonAdd = new javax.swing.JButton();
         jButtonDrop = new javax.swing.JButton();
         jButtonList = new javax.swing.JButton();
+        jBtDDL = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelPantalla = new javax.swing.JPanel();
         jPanelDDL = new javax.swing.JPanel();
@@ -89,6 +91,13 @@ public class Constraints extends javax.swing.JInternalFrame {
             }
         });
 
+        jBtDDL.setText("DDL");
+        jBtDDL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtDDLMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,10 +105,14 @@ public class Constraints extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAdd)
-                    .addComponent(jButtonDrop)
-                    .addComponent(jButtonList))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonAdd)
+                            .addComponent(jButtonDrop)
+                            .addComponent(jButtonList))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jBtDDL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +123,9 @@ public class Constraints extends javax.swing.JInternalFrame {
                 .addComponent(jButtonDrop)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonList)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtDDL)
+                .addContainerGap(218, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
@@ -121,7 +136,7 @@ public class Constraints extends javax.swing.JInternalFrame {
         jPanelPantalla.setLayout(jPanelPantallaLayout);
         jPanelPantallaLayout.setHorizontalGroup(
             jPanelPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
         jPanelPantallaLayout.setVerticalGroup(
             jPanelPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +149,7 @@ public class Constraints extends javax.swing.JInternalFrame {
         jPanelDDL.setLayout(jPanelDDLLayout);
         jPanelDDLLayout.setHorizontalGroup(
             jPanelDDLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
         jPanelDDLLayout.setVerticalGroup(
             jPanelDDLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,8 +187,36 @@ public class Constraints extends javax.swing.JInternalFrame {
         flag = "drop";
     }//GEN-LAST:event_jButtonDropActionPerformed
 
+    private void jBtDDLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtDDLMouseClicked
+        ddl.setSql("");
+        System.out.println("Flag = "+this.flag);
+        //        String sqlNewTable = newTable.tableString;
+        //        String sqlDroptable = drop.sql;
+        //        String edit = editTable.sql;
+        //        String listar = listTable.sql;
+        switch(flag){
+            case "add":
+            this.sqlShow = add.sql;
+            System.out.println("Entro a new");
+            break;
+            case "drop":
+            this.sqlShow = drop.sql;
+            System.out.println("Entro a drop");
+            break;
+            case"list":
+            this.sqlShow = list.sql;
+            System.out.println("Entro a listar");
+            break;
+        }
+        //String sql = sqlNewTable+"\n"+sqlDroptable+"\n"+edit+"\n"+listar+"\n";
+        this.logMessage += sqlShow+"\n";
+        System.out.println("ddl en logmessage: "+logMessage);
+        ddl.setSql(logMessage);
+    }//GEN-LAST:event_jBtDDLMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtDDL;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonDrop;
     private javax.swing.JButton jButtonList;

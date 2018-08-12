@@ -13,6 +13,7 @@ public class View extends javax.swing.JInternalFrame {
     ListarViews list;
     GridBagLayout layout = new GridBagLayout();
     DDL ddl;
+    String logMessage = "", sqlShow ="";
     
     String flag = "";
     
@@ -22,6 +23,7 @@ public class View extends javax.swing.JInternalFrame {
         add = new CreateView();
         drop = new DropView();
         list = new ListarViews();
+        ddl = new DDL();
         
         this.jPanelPantalla.setLayout(layout);
         GridBagConstraints c = new GridBagConstraints();
@@ -49,9 +51,16 @@ public class View extends javax.swing.JInternalFrame {
         jButtonDrop = new javax.swing.JButton();
         jButtonList = new javax.swing.JButton();
         jButtonAdd = new javax.swing.JButton();
+        jBtDDL = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelPantalla = new javax.swing.JPanel();
         jPanelDDL = new javax.swing.JPanel();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Views");
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -76,6 +85,13 @@ public class View extends javax.swing.JInternalFrame {
             }
         });
 
+        jBtDDL.setText("DDL");
+        jBtDDL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtDDLMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -85,7 +101,8 @@ public class View extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                     .addComponent(jButtonDrop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBtDDL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,7 +114,9 @@ public class View extends javax.swing.JInternalFrame {
                 .addComponent(jButtonDrop)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonList)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jBtDDL)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
@@ -157,8 +176,36 @@ public class View extends javax.swing.JInternalFrame {
         flag = "add";
     }//GEN-LAST:event_jButtonAddActionPerformed
 
+    private void jBtDDLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtDDLMouseClicked
+        ddl.setSql("");
+        System.out.println("Flag = "+this.flag);
+        //        String sqlNewTable = newTable.tableString;
+        //        String sqlDroptable = drop.sql;
+        //        String edit = editTable.sql;
+        //        String listar = listTable.sql;
+        switch(flag){
+            case "add":
+            this.sqlShow = add.sql;
+            System.out.println("Entro a new");
+            break;
+            case "drop":
+            this.sqlShow = drop.sql;
+            System.out.println("Entro a drop");
+            break;
+            case"list":
+            this.sqlShow = list.sql;
+            System.out.println("Entro a listar");
+            break;
+        }
+        //String sql = sqlNewTable+"\n"+sqlDroptable+"\n"+edit+"\n"+listar+"\n";
+        this.logMessage += sqlShow+"\n";
+        System.out.println("ddl en logmessage: "+logMessage);
+        ddl.setSql(logMessage);
+    }//GEN-LAST:event_jBtDDLMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtDDL;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonDrop;
     private javax.swing.JButton jButtonList;
