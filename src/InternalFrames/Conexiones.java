@@ -9,26 +9,26 @@ public class Conexiones extends javax.swing.JInternalFrame {
     GridBagLayout layout = new GridBagLayout();
     DropTable dropTable;
     DDL ddl;
-    CrearConexion conex;
+    CrearConexion add;
+    String flag = "";
     
     public Conexiones() {
         initComponents();
         
         ddl = new DDL();
-        conex = new CrearConexion();
+        add = new CrearConexion();
+        
         this.jPanel1.setLayout(layout);
-        System.out.println("Paso el set layout");
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
-        this.jPanel1.add(conex,c);
-        System.out.println("Paso el add conex");
+        this.jPanel1.add(add,c);
+        
         this.jTabbedPane1.setComponentAt(1, ddl);
-        System.out.println("Paso el set component");
         this.jTabbedPane1.setTitleAt(1, "DDL");
-        System.out.println("paso el set title");
        
-        conex.setVisible(false);
+        ddl.setVisible(true);
+        add.setVisible(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -63,6 +63,11 @@ public class Conexiones extends javax.swing.JInternalFrame {
         });
 
         jBtChangeConex.setText("Cambiar Conexion");
+        jBtChangeConex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtChangeConexActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBotonesLayout = new javax.swing.GroupLayout(jPanelBotones);
         jPanelBotones.setLayout(jPanelBotonesLayout);
@@ -132,9 +137,14 @@ public class Conexiones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtCrearConexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtCrearConexActionPerformed
-        this.jTabbedPane1.setComponentAt(0,conex);
         this.jTabbedPane1.setTitleAt(0, "Crear Conexion");
+        add.setVisible(true);
+        flag = "add";
     }//GEN-LAST:event_jBtCrearConexActionPerformed
+
+    private void jBtChangeConexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtChangeConexActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtChangeConexActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

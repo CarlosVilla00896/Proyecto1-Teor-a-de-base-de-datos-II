@@ -1,5 +1,6 @@
 package Panels;
 import Classes.QueryManager;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 import test.Conexion;
 /**
@@ -9,14 +10,15 @@ import test.Conexion;
 public class CrearConexion extends javax.swing.JPanel {
     
     Conexion cx;
-    String username, password, database, protocolo, sqlConnect;
+    public Connection c ;
+    String username, password, database, protocolo, sql;
     QueryManager query;
     
     public CrearConexion() {
         initComponents();
-        query = new QueryManager();
         cx = new Conexion();
-        this.setDisable();
+        query = new QueryManager();
+        //this.setDisable();
     }
 
     @SuppressWarnings("unchecked")
@@ -145,21 +147,13 @@ public class CrearConexion extends javax.swing.JPanel {
         this.username = this.jTxtUser.getText();
         this.password = this.jTxtPasword.getText();
         
-        this.protocolo = "protocol 'jdbc:derby://localhost:1527/'";
-        query.executeMethod(protocolo);
-        //connect 'resiste' user 'carlos_admin' password 'derby123' as resiste;
-        this.sqlConnect = "connect "+"'"+this.database+"'"+" user "+"'"+this.username+"'"+" password "+"'"+this.password+"'"
-                            +"as "+this.database+";";
-        if(query.executeMethod(this.sqlConnect)){
-            JOptionPane.showMessageDialog(this,"Conexion creada con exito");
-        }else{
-            if(JOptionPane.showConfirmDialog(this, "La base de datos no existe")==0){
-                //0 es si o no?
-            }else{
-                
-            }
-        }
-        
+        cx.auxDB = this.database;
+        cx.auxUser = this.username;
+        cx.auxPassword = this.password;
+        c = cx.conectar();
+        //cx.desconectar();
+        JOptionPane.showMessageDialog(this, "Conexion Creada");
+        this.setVisible(false);
     }//GEN-LAST:event_jBtAceptarActionPerformed
 
 

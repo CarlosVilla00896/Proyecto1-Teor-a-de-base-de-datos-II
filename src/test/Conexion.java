@@ -21,13 +21,15 @@ public final class Conexion {
     public String auxUser = ""; public String auxPassword = ""; public String auxDB = "";
   
     public Conexion(){
-       
+       this.auxUser = user;
+       this.auxPassword = password;
+       this.auxDB = bd;
     }
 
    
     public Conexion(String bdd, String username, String pass) {
         bd = bdd;
-        url += bd;
+        //url += bd;
         user = username;
         password = pass;
         
@@ -65,7 +67,10 @@ public final class Conexion {
         System.out.println(url);
         try{
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-            c= DriverManager.getConnection(url,user,password);
+            System.out.println("db: "+ this.auxDB);
+            System.out.println("usuario: "+this.auxUser);
+            System.out.println("pass: "+this.auxPassword);
+            c= DriverManager.getConnection(url+auxDB,auxUser,auxPassword);
             System.out.println("Se conecto bien");
         }catch(Exception e){
             System.out.println(e);
@@ -75,7 +80,7 @@ public final class Conexion {
     public void desconectar(){
         try {
             c.close();
-            System.out.println("Se desconecto bien");
+            System.out.println("Se desconecto bien la base de datos "+this.auxDB);
         } catch (SQLException ex) {
             System.out.println("No se pudo cerrar conexion");
         }
