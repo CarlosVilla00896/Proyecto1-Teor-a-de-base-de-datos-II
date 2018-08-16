@@ -74,6 +74,7 @@ public final class Conexion {
             System.out.println("Se conecto bien");
         }catch(Exception e){
             System.out.println(e);
+            return null;
         }
         return c;
     }

@@ -3,6 +3,7 @@ import Panels.NewTable;
 import Panels.DropTable;
 import Panels.EditTable;
 import Panels.ListarTablas;
+import Panels.Datos;
 import Panels.DDL;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,6 +18,7 @@ public class Tablas extends javax.swing.JInternalFrame {
     NewTable newTable;
     DropTable drop;
     EditTable editTable;
+    Datos datos;
     ListarTablas listTable;
     String logMessage = "", sqlShow ="";
     String flag = "";
@@ -28,6 +30,7 @@ public class Tablas extends javax.swing.JInternalFrame {
         drop = new DropTable();
         editTable = new EditTable();
         listTable = new ListarTablas();
+        datos = new Datos();
         this.jPanelPantalla.setLayout(layout);
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
@@ -42,6 +45,9 @@ public class Tablas extends javax.swing.JInternalFrame {
         c.gridx = 0;
         c.gridy = 0;
         this.jPanelPantalla.add(listTable,c);
+        c.gridx = 0;
+        c.gridy = 0;
+        this.jPanelPantalla.add(datos,c);
         
         this.jTabbedPane1.setComponentAt(1, ddl);
         this.jTabbedPane1.setTitleAt(1, "DDL");
@@ -50,6 +56,7 @@ public class Tablas extends javax.swing.JInternalFrame {
         drop.setVisible(false);
         editTable.setVisible(false);
         listTable.setVisible(false);
+        datos.setVisible(false);
         ddl.setVisible(true);
         
     }
@@ -117,6 +124,11 @@ public class Tablas extends javax.swing.JInternalFrame {
         jBtModifiyData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBtModifiyDataMouseClicked(evt);
+            }
+        });
+        jBtModifiyData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtModifiyDataActionPerformed(evt);
             }
         });
 
@@ -202,6 +214,7 @@ public class Tablas extends javax.swing.JInternalFrame {
         drop.setVisible(false);
         editTable.setVisible(false);
         listTable.setVisible(false);
+        datos.setVisible(false);
         this.jTabbedPane1.setTitleAt(0, "New Table");
         flag = "new";
         
@@ -220,6 +233,7 @@ public class Tablas extends javax.swing.JInternalFrame {
         drop.setVisible(true);
         editTable.setVisible(false);
         listTable.setVisible(false);
+        datos.setVisible(false);
         this.jTabbedPane1.setTitleAt(0, "Drop Table");
         flag = "drop";
     }//GEN-LAST:event_jBtEliminarMouseClicked
@@ -229,6 +243,7 @@ public class Tablas extends javax.swing.JInternalFrame {
         drop.setVisible(false);
         editTable.setVisible(true);
         listTable.setVisible(false);
+        datos.setVisible(false);
         this.jTabbedPane1.setTitleAt(0, "Edit Table");
         flag = "edit";
     }//GEN-LAST:event_jBtModifyMouseClicked
@@ -238,6 +253,7 @@ public class Tablas extends javax.swing.JInternalFrame {
         drop.setVisible(false);
         editTable.setVisible(false);
         listTable.setVisible(true);
+        datos.setVisible(false);
         this.jTabbedPane1.setTitleAt(0, "Listar Tables");
         flag = "listar";
         
@@ -275,6 +291,11 @@ public class Tablas extends javax.swing.JInternalFrame {
                 this.sqlShow = listTable.sql;
                 System.out.println("Entro a listar");
                 break;
+            case "datos":
+                this.sqlShow = datos.sql;
+                break;
+            default:
+                this.sqlShow ="";
         }
         //String sql = sqlNewTable+"\n"+sqlDroptable+"\n"+edit+"\n"+listar+"\n";
         this.logMessage += sqlShow+"\n";
@@ -283,8 +304,18 @@ public class Tablas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtDDLMouseClicked
 
     private void jBtModifiyDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtModifiyDataMouseClicked
-        // TODO add your handling code here:
+        newTable.setVisible(false);
+        drop.setVisible(false);
+        editTable.setVisible(false);
+        listTable.setVisible(false);
+        datos.setVisible(true);
+        this.jTabbedPane1.setTitleAt(0, "Datos");
+        flag = "datos";
     }//GEN-LAST:event_jBtModifiyDataMouseClicked
+
+    private void jBtModifiyDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtModifiyDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtModifiyDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

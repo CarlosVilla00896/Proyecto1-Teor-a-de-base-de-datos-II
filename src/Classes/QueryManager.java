@@ -1,9 +1,12 @@
 package Classes;
+import Panels.DDL;
 import java.sql.*;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import test.Conexion;
-import Panels.DDL;
 /**
  *
  * @author PC
@@ -17,6 +20,7 @@ public class QueryManager {
     public Statement s;
     PreparedStatement psInsertTable_values, psEditTable_values, psDeleteTable_values, psEditTable, psDeleteTable;
     String answer;
+    public String labelArr [];
     
     public QueryManager(){
         c = new Conexion();
@@ -44,6 +48,26 @@ public class QueryManager {
         return true;
     }
     
+    public boolean executeUpdate(String sql){
+        try{
+            cx = c.conectar();
+            s = cx.createStatement();
+            s.execute("SET SCHEMA TEST");
+            s.executeUpdate(sql);
+            
+                        
+            c.desconectar();
+            s.close();
+            cx.close();
+            System.out.println("Se completo el execute update");
+            
+        }catch (Throwable e){
+            e.printStackTrace();
+            System.out.println("No se completo el execute update");
+            return false;
+        }
+        return true;
+    }
     public boolean validarTabla(){
         try{
             //code here
@@ -73,12 +97,40 @@ public class QueryManager {
         return result;
     }
     
+    public void setComboBoxData(JComboBox combo,String sql ){
+        try{
+            DefaultComboBoxModel comboModel = new DefaultComboBoxModel(); 
+            ResultSet rs = this.executeQuery(sql);
+            ResultSetMetaData meta = rs.getMetaData();
+            int cantColumn = meta.getColumnCount();
+            
+            this.labelArr = new String [cantColumn];
+            System.out.println("Cant columnas combobox: "+cantColumn);
+            for(int i=1; i<= cantColumn;i++){
+                comboModel.addElement(meta.getColumnLabel(i));
+                this.labelArr[i-1] = meta.getColumnTypeName(i);
+                System.out.println("tipo: "+this.labelArr[i-1]);
+            }
+            
+            combo.setModel(comboModel);
+            rs.close();
+            this.s.close();
+            this.cx.close();
+            this.c.desconectar();
+            System.out.println("Funciona combomodel");
+        }catch(Throwable e){
+            e.printStackTrace();
+            System.out.println("No funciona combomodel");
+        }
+    }
+
     public void seTableData(JTable table, String sql){
         try{
             DefaultTableModel dataModel = new DefaultTableModel();
             ResultSet rs = this.executeQuery(sql);
             ResultSetMetaData meta = rs.getMetaData();
             int cantColumn = meta.getColumnCount();
+            //this.setComboBoxData(meta, cantColumn);
             
             for(int i=1; i<=cantColumn;i++){
                 dataModel.addColumn(meta.getColumnLabel(i));

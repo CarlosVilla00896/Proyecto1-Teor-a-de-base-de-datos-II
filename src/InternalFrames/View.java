@@ -37,6 +37,9 @@ public class View extends javax.swing.JInternalFrame {
         c.gridy = 0;
         this.jPanelPantalla.add(list,c);
         
+        this.jTabbedPane1.setComponentAt(1, ddl);
+        this.jTabbedPane1.setTitleAt(1, "DDL");
+        
         ddl.setVisible(true);
         add.setVisible(false);
         drop.setVisible(false);

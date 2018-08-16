@@ -12,6 +12,7 @@ public class Conexiones extends javax.swing.JInternalFrame {
     CrearConexion add;
     String flag = "";
     
+    
     public Conexiones() {
         initComponents();
         
@@ -54,6 +55,11 @@ public class Conexiones extends javax.swing.JInternalFrame {
         jPanelBotones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jBtEliminar.setText("Eliminar Conexion");
+        jBtEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtEliminarActionPerformed(evt);
+            }
+        });
 
         jBtCrearConex.setText("Crear Conexion");
         jBtCrearConex.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +151,10 @@ public class Conexiones extends javax.swing.JInternalFrame {
     private void jBtChangeConexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtChangeConexActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtChangeConexActionPerformed
+
+    private void jBtEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,4 +1,6 @@
 package Frames;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
 import test.Conexion;
 /**
  *
@@ -137,9 +139,18 @@ public class Login extends javax.swing.JFrame {
         this.db = this.jTextBd.getText();
         
         Conexion conexion = new Conexion(db, user, pass);
-        conexion.conectar();
-        app.setVisible(true);
-        this.dispose();
+        if(conexion.conectar()==null){
+            JOptionPane.showMessageDialog(this, "Usuario, contraseña o base de datos incorrectas");
+            this.jTextBd.setText("");
+            this.jTextPass.setText("");
+            this.jTextUser.setText("");
+        }else{
+           app.setVisible(true);
+           this.jTextBd.setText("");
+           this.jTextPass.setText("");
+           this.jTextUser.setText("");
+           this.dispose();   
+        }
     }//GEN-LAST:event_jButtonConnectActionPerformed
 
     private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCloseActionPerformed
