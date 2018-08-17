@@ -33,16 +33,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Procedimientos Almacenados"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSPActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemTRG">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Triggers"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemTRGActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemFN">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Funciones"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemFNActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

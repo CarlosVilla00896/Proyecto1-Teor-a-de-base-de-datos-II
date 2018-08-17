@@ -3,6 +3,9 @@ import InternalFrames.Tablas;
 import InternalFrames.Conexiones;
 import InternalFrames.Constraints;
 import InternalFrames.View;
+import InternalFrames.Triggers;
+import InternalFrames.Procedures;
+import InternalFrames.Functions;
 
 /**
  *
@@ -67,12 +70,27 @@ public class AplicationWindow extends javax.swing.JFrame {
         jMenu3.setText("Procedures");
 
         jMenuItemSP.setText("Procedimientos Almacenados");
+        jMenuItemSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSPActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemSP);
 
         jMenuItemTRG.setText("Triggers");
+        jMenuItemTRG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemTRGActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemTRG);
 
         jMenuItemFN.setText("Funciones");
+        jMenuItemFN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFNActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItemFN);
 
         jMenuBar1.add(jMenu3);
@@ -136,6 +154,24 @@ public class AplicationWindow extends javax.swing.JFrame {
         this.jDesktopPane1.add(view);
         view.setVisible(true);
     }//GEN-LAST:event_jMenuItemViewActionPerformed
+
+    private void jMenuItemTRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTRGActionPerformed
+        Triggers trigger = new Triggers();
+        this.jDesktopPane1.add(trigger);
+        trigger.setVisible(true);
+    }//GEN-LAST:event_jMenuItemTRGActionPerformed
+
+    private void jMenuItemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSPActionPerformed
+        Procedures procedures = new Procedures();
+        this.jDesktopPane1.add(procedures);
+        procedures.setVisible(true);
+    }//GEN-LAST:event_jMenuItemSPActionPerformed
+
+    private void jMenuItemFNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFNActionPerformed
+        Functions functions = new Functions();
+        this.jDesktopPane1.add(functions);
+        functions.setVisible(true);
+    }//GEN-LAST:event_jMenuItemFNActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -17,6 +17,7 @@ public class EditTable extends javax.swing.JPanel {
     public EditTable() {
         initComponents();
         query = new QueryManager();
+        this.jRadioAgregar.setSelected(true);
 //        editColumn = new ModificarCampos(null, true);
     }
     @SuppressWarnings("unchecked")
@@ -141,8 +142,18 @@ public class EditTable extends javax.swing.JPanel {
         jLabel8.setText("Nuevo nombre del campo:");
 
         jRadioAgregar.setText("Agregar");
+        jRadioAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioAgregarActionPerformed(evt);
+            }
+        });
 
         jRadioEliminar.setText("Eliminar");
+        jRadioEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioEliminarActionPerformed(evt);
+            }
+        });
 
         jRadioModificar.setText("Modificar");
 
@@ -380,6 +391,20 @@ public class EditTable extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "El campo no se puede eliminar porque no existe o tiene restricion de llava foranea");
         }
     }//GEN-LAST:event_jBtEliminarMouseClicked
+
+    private void jRadioAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioAgregarActionPerformed
+        this.jTNewName.setEnabled(false);
+        this.jTextNewTableName.setEnabled(false);
+        this.jButtonAgregar.setEnabled(true);
+    }//GEN-LAST:event_jRadioAgregarActionPerformed
+
+    private void jRadioEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioEliminarActionPerformed
+        this.jTNewName.setEnabled(false);
+        this.jTxtPrecision.setEnabled(false);
+        this.jTextNewTableName.setEnabled(false);
+        this.jComboBoxTipo.setEnabled(false);
+        this.jBtEliminar.setEnabled(true);
+    }//GEN-LAST:event_jRadioEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

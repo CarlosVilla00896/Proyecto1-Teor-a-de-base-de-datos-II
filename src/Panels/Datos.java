@@ -246,7 +246,7 @@ public class Datos extends javax.swing.JPanel {
         this.tableName = this.jTxtTableName.getText();
         this.sql = "SELECT * FROM "+this.tableName;
         query.seTableData(this.jTable1, this.sql);
-        query.setComboBoxData(this.jCbCampos, this.sql);
+        query.setComboBoxDataColumn(this.jCbCampos, this.sql);
         this.labelArr = query.labelArr;
         this.jTxtTipo.setText(this.labelArr[this.jCbCampos.getSelectedIndex()]);
         this.limpiar();

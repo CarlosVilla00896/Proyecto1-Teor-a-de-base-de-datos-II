@@ -97,7 +97,7 @@ public class QueryManager {
         return result;
     }
     
-    public void setComboBoxData(JComboBox combo,String sql ){
+    public void setComboBoxDataColumn(JComboBox combo,String sql ){
         try{
             DefaultComboBoxModel comboModel = new DefaultComboBoxModel(); 
             ResultSet rs = this.executeQuery(sql);
@@ -123,6 +123,37 @@ public class QueryManager {
             System.out.println("No funciona combomodel");
         }
     }
+    
+    public void setComboBoxDataRows(JComboBox combo,String sql){
+        try{
+            DefaultComboBoxModel comboModel = new DefaultComboBoxModel(); 
+            ResultSet rs = this.executeQuery(sql);
+            ResultSetMetaData meta = rs.getMetaData();
+            int cantColumn = meta.getColumnCount();
+            
+            this.labelArr = new String [cantColumn];
+            System.out.println("Cant columnas combobox rows: "+cantColumn);
+            String row[] = new String[cantColumn];
+            
+            while(rs.next()){
+                for(int i=0; i<cantColumn; i++){
+                    row[i] = rs.getObject(i+1).toString();
+                    System.out.println(row);
+                }
+                comboModel.addElement(row);
+            }
+            
+            combo.setModel(comboModel);
+            rs.close();
+            this.s.close();
+            this.cx.close();
+            this.c.desconectar();
+            System.out.println("Funciona combomodel row");
+        }catch(Throwable e){
+            e.printStackTrace();
+            System.out.println("No funciona combomodel row");
+        }
+    }
 
     public void seTableData(JTable table, String sql){
         try{
@@ -130,7 +161,7 @@ public class QueryManager {
             ResultSet rs = this.executeQuery(sql);
             ResultSetMetaData meta = rs.getMetaData();
             int cantColumn = meta.getColumnCount();
-            //this.setComboBoxData(meta, cantColumn);
+            //this.setComboBoxDataColumn(meta, cantColumn);
             
             for(int i=1; i<=cantColumn;i++){
                 dataModel.addColumn(meta.getColumnLabel(i));
